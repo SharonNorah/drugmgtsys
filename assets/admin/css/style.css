@@ -1,0 +1,14 @@
+#wrapper {
+    width: 100%;
+}
+table {
+    border-collapse: inherit;
+    width: 100%;
+}
+
+.content.animate-panel {
+    width: 100%;
+}
+.create_invetory{
+    display: none;
+}
