@@ -11,8 +11,10 @@ class Center extends CI_Controller {
 		$this->load->library(array('ion_auth'));
 		$this->load->model('Admin_model');
 
-	}
-	public function index($page = 'admin-template') {
+    }
+    
+    public function index($page = 'admin-template') 
+    {
 
 		
 			$data["centers"] = $this->Admin_model->list_centers();
@@ -25,49 +27,15 @@ class Center extends CI_Controller {
 		
 	}
 
-
-	public function create_centers() 
-	{
-		$page = 'admin-template';
-		
-		$data = array();
-		$this->form_validation->set_rules('order_date', 'order_date', 'required');
-		$this->form_validation->set_rules('supplier', 'supplier', 'required');
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-		
-        if ($this->form_validation->run() === FALSE)
-        {
-		
-			$data["data"] = array();
-			$this->load->view('layouts/admin-header', $data);
-			$this->load->view('layouts/admin-left-menu', $data);
-			$this->load->view('layouts/' . $page, $data);
-			$this->load->view('layouts/admin-footer', $data);
-
- 
-        }
-        else
-        {
-			$this->Admin_model->create_centers();
-			
-			if(isset($_POST['center_id'])){
-				$order_id = $_POST['order_id'];
-				redirect("?/admin/create_order/".$order_id );
-			}
-
-        }
-
-    }
-		
-	
-
 	public function create_center() 
 	{
 		$page = 'admin-template';
 		$data['center_id'] = $this->uri->segment(3);
 
-		$this->form_validation->set_rules('quantity', 'quantity', 'required');
-		$this->form_validation->set_rules('drug_code', 'drug code', 'required');
+		$this->form_validation->set_rules('center_code', 'center_code', 'required');
+        $this->form_validation->set_rules('center_name', 'center_name', 'required');
+        $this->form_validation->set_rules('district', 'district', 'required');
+        $this->form_validation->set_rules('level', 'level', 'required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
         if ($this->form_validation->run() === FALSE)
@@ -83,14 +51,13 @@ class Center extends CI_Controller {
         }
         else
         {
-			$order_status = $_POST['order_status'];
-			$this->Admin_model->create_center($data['order_id']);
-            redirect("?/admin/order");
+            $this->Admin_model->create_center();
+            redirect("?/admin/center");
         }
 		
 	}
 
-	public function edit_centers($id)
+	public function edit_center($center_code)
 	{
 		$page = 'admin-template';
 		$data = array();
@@ -102,17 +69,21 @@ class Center extends CI_Controller {
 		
         if ($this->form_validation->run() === FALSE)
         {
-			$data["data"] = $this->Admin_model->get_center('','',$id);
+			$data["data"] = $this->Admin_model->get_center('', '', $center_code);
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
 			$this->load->view('layouts/' . $page, $data);
-			$this->load->view('layouts/admin-footer', $data);
+            $this->load->view('layouts/admin-footer', $data);
+            if (!$this->ion_auth->logged_in())
+            {
+              redirect('?/auth/login');
+            }
  
         }
         else
         {
-            $this->Admin_model->create_drug($id);
-            echo "<META http-equiv=refresh content=0;URL=?/admin/centers>";
+            $this->Admin_model->create_center($center_code);
+            echo "<META http-equiv=refresh content=0;URL=?/admin/drug>";
         }
 		
 		

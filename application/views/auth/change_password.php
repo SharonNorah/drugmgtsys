@@ -28,7 +28,7 @@
             </p>
 
             <?php echo form_input($user_id);?>
-            <p><?php echo form_submit('submit', lang('change_password_submit_btn'));?></p>
+            <p><?php echo form_submit('submit', lang('change_password_submit_btn'), array('class' => 'col-sm-12 control-label no-padding-right btn btn-primary'));?></p>
 
             <?php echo form_close();?>
         </div>

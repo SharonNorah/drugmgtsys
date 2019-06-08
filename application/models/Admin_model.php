@@ -260,4 +260,51 @@ class Admin_Model extends CI_Model{
         return $this->db->delete('drug');
     }
 
+    public function list_centers()
+    {
+        $this->db->order_by("center_code", "ASC");
+        $this->db->distinct();
+        $query = $this->db->get("center");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function create_center($id = 0)
+    {
+
+            $data = array(
+                'center_code' => $_POST['center_code'],
+                'center_name' => $_POST['center_name'],
+                'district' => $_POST['district'],
+                'level' => $_POST['level'],
+            );
+            
+            if ($id == 0) {
+                return $this->db->insert('center', $data);
+            } else {
+                $this->db->where('center_code', $id);
+                return $this->db->update('center', $data);
+            }    
+    }
+    public function get_center($limit, $start, $center_code='')
+    {
+        if(empty($center_code)){
+			$this->db->limit($limit, $start);
+			$query = $this->db->get('center');
+            if ($query->num_rows() > 0) {
+				foreach ($query->result() as $row) {
+					$data[] = $row;
+				}
+				return $row;
+			}
+			return false;
+        } else {
+			$query = $this->db->get_where('center', array('center_code' => $center_code));
+			return $query->row_array();
+		}
+    }
+
 }

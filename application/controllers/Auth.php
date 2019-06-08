@@ -97,11 +97,13 @@ class Auth extends CI_Controller
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 			);
 
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
@@ -153,23 +155,27 @@ class Auth extends CI_Controller
 				'name' => 'old',
 				'id' => 'old',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 			);
 			$this->data['new_password'] = array(
 				'name' => 'new',
 				'id' => 'new',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			);
 			$this->data['new_password_confirm'] = array(
 				'name' => 'new_confirm',
 				'id' => 'new_confirm',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			);
 			$this->data['user_id'] = array(
 				'name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $user->id,
 			);
 
@@ -309,18 +315,21 @@ class Auth extends CI_Controller
 					'name' => 'new',
 					'id' => 'new',
 					'type' => 'password',
+					'class' => 'col-sm-12 form-control control-label no-padding-right',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				);
 				$this->data['new_password_confirm'] = array(
 					'name' => 'new_confirm',
 					'id' => 'new_confirm',
 					'type' => 'password',
+					'class' => 'col-sm-12 form-control control-label no-padding-right',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				);
 				$this->data['user_id'] = array(
 					'name' => 'user_id',
 					'id' => 'user_id',
 					'type' => 'hidden',
+					'class' => 'col-sm-12 form-control control-label no-padding-right',
 					'value' => $user->id,
 				);
 				$this->data['csrf'] = $this->_get_csrf_nonce();
@@ -525,54 +534,63 @@ class Auth extends CI_Controller
 				'name' => 'first_name',
 				'id' => 'first_name',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name' => 'last_name',
 				'id' => 'last_name',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['identity'] = array(
 				'name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['email'] = array(
 				'name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['company'] = array(
 				'name' => 'company',
 				'id' => 'company',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('company'),
 			);
 			$this->data['phone'] = array(
 				'name' => 'phone',
 				'id' => 'phone',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['center_code'] = array(
 				'name' => 'center_code',
 				'id' => 'center_code',
 				'type' => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('center_code'),
 			);
 			$this->data['password'] = array(
 				'name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('password'),
 			);
 			$this->data['password_confirm'] = array(
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
 				'type' => 'password',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
@@ -701,35 +719,41 @@ class Auth extends CI_Controller
 			'name'  => 'first_name',
 			'id'    => 'first_name',
 			'type'  => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
 		);
 		$this->data['last_name'] = array(
 			'name'  => 'last_name',
 			'id'    => 'last_name',
 			'type'  => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		);
 		$this->data['company'] = array(
 			'name'  => 'company',
 			'id'    => 'company',
 			'type'  => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value' => $this->form_validation->set_value('company', $user->company),
 		);
 		$this->data['phone'] = array(
 			'name'  => 'phone',
 			'id'    => 'phone',
 			'type'  => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
 			'id'   => 'password',
-			'type' => 'password'
+			'type' => 'password',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 		);
 		$this->data['password_confirm'] = array(
 			'name' => 'password_confirm',
 			'id'   => 'password_confirm',
-			'type' => 'password'
+			'type' => 'password',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 		);
 
 		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_user', $this->data);
@@ -773,12 +797,14 @@ class Auth extends CI_Controller
 				'name'  => 'group_name',
 				'id'    => 'group_name',
 				'type'  => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('group_name'),
 			);
 			$this->data['description'] = array(
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
+				'class' => 'col-sm-12 form-control control-label no-padding-right',
 				'value' => $this->form_validation->set_value('description'),
 			);
 
@@ -844,6 +870,7 @@ class Auth extends CI_Controller
 			'name'    => 'group_name',
 			'id'      => 'group_name',
 			'type'    => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value'   => $this->form_validation->set_value('group_name', $group->name),
 			$readonly => $readonly,
 		);
@@ -851,6 +878,7 @@ class Auth extends CI_Controller
 			'name'  => 'group_description',
 			'id'    => 'group_description',
 			'type'  => 'text',
+			'class' => 'col-sm-12 form-control control-label no-padding-right',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 

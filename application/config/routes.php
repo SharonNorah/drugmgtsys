@@ -53,6 +53,7 @@ $route['default_controller']            = 'admin/dashboard';
 $route['404_override']                  = '';
 $route['translate_uri_dashes']          = FALSE;
 $route['auth']                          = 'auth';
+$route['admin']                         = 'admin/dashboard';
 
 $route['admin/create_drug']             = 'admin/drug/create_drug/';
 $route['admin/create_drug/(:any)']      = 'admin/drug/create_drug/$1';
@@ -73,8 +74,8 @@ $route['admin/list_order/']             = 'admin/order/list_order';
 $route['admin/list_order/(:any)']       = 'admin/order/list_order/$1';
 
 $route['admin/center']                   = 'admin/center';
-$route['admin/create_center']           = 'admin/order/create_center/';
-$route['admin/create_center/(:any)']     = 'admin/order/create_center/$1';
-$route['admin/edit_center/(:any)']       = 'admin/order/edit_center/$1';
-$route['admin/list_center/']             = 'admin/order/list_center';
-$route['admin/list_center/(:any)']       = 'admin/order/list_center/$1';
+$route['admin/create_center']            = 'admin/center/create_center/';
+$route['admin/create_center/(:any)']     = 'admin/center/create_center/$1';
+$route['admin/edit_center/(:any)']       = 'admin/center/edit_center/$1';
+$route['admin/list_center/']             = 'admin/center/list_center';
+$route['admin/list_center/(:any)']       = 'admin/center/list_center/$1';

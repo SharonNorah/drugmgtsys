@@ -69,7 +69,7 @@
                   <?php echo form_hidden('id', $user->id);?>
                   <?php echo form_hidden($csrf); ?>
 
-                  <p><?php echo form_submit('submit', lang('edit_user_submit_btn'));?></p>
+                  <p><?php echo form_submit('submit', lang('edit_user_submit_btn'), array('class' => 'col-sm-12 control-label no-padding-right btn btn-primary'));?></p>
 
             <?php echo form_close();?>
         </div>

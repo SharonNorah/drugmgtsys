@@ -12,45 +12,47 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                            <th>Drug Code</th>
-                            <th>Drug Name</th>
-                            <th>Strength</th>
-                            <th>Category</th>
-                            <th>Unit Pack</th>
+                            <th>Center Code</th>
+                            <th>Center Name</th>
+                            <th>District</th>
+                            <th>Level</th>
                             <th>Action</th>
                         </tr>
                   </thead>
                   <tfoot>
-				  <tr>
-                        <th>Drug Code</th>
-						<th>Drug Name</th>
-						<th>Strength</th>
-						<th>Category</th>
-						<th>Unit Pack</th>
-                        <th>Action</th>
-					</tr>
+				            <tr>
+                            <th>Center Code</th>
+                            <th>Center Name</th>
+                            <th>District</th>
+                            <th>Level</th>
+                            <th>Action</th>
+					          </tr>
                   </tfoot>
                   <tbody>
-				  <?php foreach ($drugs as $drug):?>
-						<tr>
-							<td><?php echo htmlspecialchars($drug->drug_code,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($drug->drug_name,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($drug->strength,ENT_QUOTES,'UTF-8');?></td>
-                            <td><?php echo htmlspecialchars($drug->category,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($drug->unit_pack,ENT_QUOTES,'UTF-8');?></td>
-                            <td>
-                            <?php echo anchor("?/admin/edit_drug/".$drug->id, 'Edit') ;?> | <?php echo anchor("?/admin/delete_drug/".$drug->id, 'Delete');?></td>
+          <?php 
+          if($centers){
+          
+            foreach ($centers as $center):?>
+              <tr>
+                <td><?php echo htmlspecialchars($center->center_code,ENT_QUOTES,'UTF-8');?></td>
+                <td><?php echo htmlspecialchars($center->center_name,ENT_QUOTES,'UTF-8');?></td>
+                <td><?php echo htmlspecialchars($center->district,ENT_QUOTES,'UTF-8');?></td>
+                <td><?php echo htmlspecialchars($center->level,ENT_QUOTES,'UTF-8');?></td>
+                <td>
+                              <?php echo anchor("?/admin/edit_center/".$center->center_code, 'Edit') ;?> | <?php echo anchor("?/admin/delete_center/".$center->center_code, 'Delete');?></td>
 
 
-						</tr>
-					<?php endforeach;?>
+              </tr>
+            <?php endforeach;
+            
+          }?>
                   </tbody>
                 </table>
               </div>
 			</div>
 			<div class="card-footer py-3">
 			  <p class="m-0 font-weight-bold text-primary">
-				  <?php echo anchor('?/admin/list_inventory', 'View Inventory')?> | <?php echo anchor('?/admin/create_drug', 'Add New Drug')?>
+				  <?php echo anchor('?/admin/create_center ', 'Add New Center')?>
 			  </p>
 
             </div>

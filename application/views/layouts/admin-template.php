@@ -24,7 +24,7 @@ if ($this->uri->segment(2) == 'dashboard') {
 
 	$this->load->view('admin/edit_drug');
 
-}  elseif ($this->uri->segment(2) == 'create_drug') {
+} elseif ($this->uri->segment(2) == 'create_drug') {
 
 	$this->load->view('admin/create_drug');
 
@@ -66,8 +66,16 @@ if ($this->uri->segment(2) == 'dashboard') {
    
 } elseif ($this->uri->segment(2) == 'center') {
   
-  $this->load->view('admin/center');
+  $this->load->view('admin/list_centers');
    
+} elseif ($this->uri->segment(2) == 'create_center') {
+  
+  $this->load->view('admin/create_center');
+   
+} elseif (($this->uri->segment(2) == 'edit_center') && ($this->uri->segment(3) != '')) {
+
+	$this->load->view('admin/edit_center');
+
 } else {
 	show_404();
 }

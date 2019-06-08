@@ -43,12 +43,12 @@
                    <?php echo form_open("?/auth/login");?>
 
                     <p>
-                      <?php echo lang('login_identity_label', 'identity');?>
+                      <?php echo lang('login_identity_label', 'identity');?> <br>
                       <?php echo form_input($identity);?>
                     </p>
 
                     <p>
-                      <?php echo lang('login_password_label', 'password');?>
+                      <?php echo lang('login_password_label', 'password');?><br>
                       <?php echo form_input($password);?>
                     </p>
 
@@ -58,7 +58,7 @@
                     </p>
 
 
-                    <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
+                    <p><?php echo form_submit('submit', lang('login_submit_btn'), array('class' => 'col-sm-12 control-label no-padding-right btn btn-primary'));?></p>
 
                   <?php echo form_close();?>
 

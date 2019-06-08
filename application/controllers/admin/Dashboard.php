@@ -24,11 +24,16 @@ class Dashboard extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'html', 'text', 'security'));
 		$this->load->database();
 		$this->load->library(array('ion_auth'));
+		if (!$this->ion_auth->logged_in())
+		{
+		  redirect('?/auth/login');
+		}
 
 	}
 
 
 	public function index($page = 'admin-template') {
+
 
 		if (!file_exists(APPPATH . 'views/layouts/' . $page . '.php')) {
 			show_404();
