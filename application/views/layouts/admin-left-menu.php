@@ -185,27 +185,42 @@
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                 </div>
             </li>
-
+<?php
+                    if($orders){
+                      
+                      foreach($orders as $var){ 
+                          if(($var->order_status === 'Pending Approval') && ($var->supplier === $user->id)){
+                            $order_num = $orders;
+                            $order = $var;
+                            $message = 'Is Pendind Approval';
+                          }elseif(($var->sender === $user->id)){
+                            $order_num = $orders;
+                            if(($order->supplier === $user->id)){
+                              $order = $var;
+                              $message = 'Is Pendind Approval';
+                            }
+                            if(($var->supplier === $user->id)){
+                              $order = $var;
+                              $message = 'Is Approved';
+                            }
+                            if(($var->supplier === $user->id)){
+                              $order = $var;
+                              $message = 'Is Rejected';
+                            }
+                          }
+                        }
+                        }
+?>
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
                 <span class="badge badge-danger badge-counter">
-                <?php 
+                  <?php 
 
-                  if($orders){
-                  foreach($orders as $order){ 
-                    $this->db->where('order_status', 'Pending Approval');
-                    $this->db->where('supplier', $order->supplier)->or_where('sender', $order->supplier);
-                        $query = $this->db->get('orders');
-                        $result = $query->result();
-                  var_dump($query->num_rows());
-                       if($result){
-                         // echo $query->num_rows();
-                        }
-                      }
-                    }
+                      $num = count($order_num);
+                      echo $num;
                 ?></span>
                 </a>
                 <!-- Dropdown - Messages -->
@@ -213,45 +228,14 @@
                 <h6 class="dropdown-header">
                     Order Notifications
                 </h6>
-                <?php 
-                if($orders){
-                       foreach($orders as $order){ 
-                    
-                         if($order->supplier == $user->id && $order->order_status == 'Pending Approval'){?>
-                    <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
-                    <div class="font-weight-bold">
-                          <div class="text-truncate"> Order <b><?php echo $order->order_id; ?></b> is pending approval
+                       <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
+                        <div class="font-weight-bold">
+                          <div class="text-truncate"> Order <b><?php echo $order->order_id; ?></b> <?php echo $message; ?>
                           </div>
-                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
+                          <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
 
-                    </div>
-                </a>
-                        <?php  }
-                         if($order->sender == $user->id && $order->order_status == 'Pending Approval'){?>
-                                         <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
-                    <div class="font-weight-bold">
-                          <div class="text-truncate">Order <b><?php echo $order->order_id; ?></b> is pending approval
-                          </div>
-                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
-
-                    </div>
-                </a>
-                        <?php }
-                        if($order->sender == $user->id && $order->order_status == 'Order Approved'){?>
-                                        <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
-                    <div class="font-weight-bold">
-                          <div class="text-truncate">Order <b><?php echo $order->order_id; ?></b> has been approved
-                          </div>
-                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
-
-                    </div>
-                </a>
-                        <?php 
-                        }
-                    ?>
-                <?php 
-                       }
-                     }?>
+                        </div>
+                      </a>
                 <a class="dropdown-item text-center small text-gray-500" href="?/admin/orders">Read More Messages</a>
                 </div>
             </li>
