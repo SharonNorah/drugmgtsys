@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller']            = 'admin/dashboard';
 $route['404_override']                  = '';
 $route['translate_uri_dashes']          = FALSE;
-$route['auth']                          = 'auth';
+$route['auth/']                          = 'auth';
 $route['admin']                         = 'admin/dashboard';
 
 $route['admin/create_drug']             = 'admin/drug/create_drug/';

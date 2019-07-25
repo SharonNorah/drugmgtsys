@@ -26,17 +26,13 @@ class Auth extends CI_Controller
 	public function index()
 	{
 		$this->data['title'] = "Dashboard";
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
 			redirect('?/auth/login', 'refresh');
-		}
-		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
-		{
-			// redirect them to the home page because they must be an administrator to view this
-			return show_error('You must be an administrator to view this page.');
 		}
 		else
 		{
@@ -62,6 +58,7 @@ class Auth extends CI_Controller
 	public function login()
 	{
 		$this->data['title'] = $this->lang->line('login_heading');
+		$this->data["date"] = $this->Admin_model->get_date();
 
 		// validate form input
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
@@ -116,6 +113,7 @@ class Auth extends CI_Controller
 	public function logout()
 	{
 		$this->data['title'] = "Logout";
+		$this->data["date"] = $this->Admin_model->get_date();
 
 		// log the user out
 		$logout = $this->ion_auth->logout();
@@ -131,6 +129,7 @@ class Auth extends CI_Controller
 	public function change_password()
 	{
 		$this->data['title'] = "Change Password";
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header');
 		$this->load->view('layouts/admin-left-menu');
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
@@ -209,6 +208,7 @@ class Auth extends CI_Controller
 	public function forgot_password()
 	{
 		$this->data['title'] = "Change Password";
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header');
 		$this->load->view('layouts/admin-left-menu');
 		// setting validation rules by checking whether identity is username or email
@@ -418,6 +418,7 @@ class Auth extends CI_Controller
 	public function deactivate($id = NULL)
 	{
 		$this->data['title'] = "Dashboard";
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -470,6 +471,7 @@ class Auth extends CI_Controller
 	public function create_user()
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
@@ -617,6 +619,7 @@ class Auth extends CI_Controller
 	public function edit_user($id)
 	{
 		$this->data['title'] = $this->lang->line('edit_user_heading');
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
@@ -765,6 +768,7 @@ class Auth extends CI_Controller
 	public function create_group()
 	{
 		$this->data['title'] = $this->lang->line('create_group_title');
+		$this->data["date"] = $this->Admin_model->get_date();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
