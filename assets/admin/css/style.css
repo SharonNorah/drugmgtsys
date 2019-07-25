@@ -18,3 +18,7 @@ table {
 .input-group.control-group .form-field-1{
     display: none;
 }
+
+.topbar .dropdown-list .dropdown-item .text-truncate {
+    white-space: normal;
+}

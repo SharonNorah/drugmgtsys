@@ -192,20 +192,26 @@
                           if(($var->order_status === 'Pending Approval') && ($var->supplier === $user->id)){
                             $order_num = $orders;
                             $order = $var;
-                            $message = 'Is Pendind Approval';
-                          }elseif(($var->sender === $user->id)){
+                            $num = count($var->order_status);
+                            $message = 'Is Pending Approval';
+                          }
+                          if(($var->sender === $user->id)){
+                            
                             $order_num = $orders;
-                            if(($order->supplier === $user->id)){
+                            $num = count($var->order_status);
+                            if($var->order_status === 'Pending Approval'){
                               $order = $var;
-                              $message = 'Is Pendind Approval';
+                              $message = 'Is Pending Approval from';
                             }
-                            if(($var->supplier === $user->id)){
+                            if($var->order_status === 'Approved'){
                               $order = $var;
-                              $message = 'Is Approved';
+                              $message = 'Was Approved by';
+                              $action_date = $var->action_date;
                             }
-                            if(($var->supplier === $user->id)){
+                            if($var->order_status === 'Rejected'){
                               $order = $var;
-                              $message = 'Is Rejected';
+                              $message = 'Was Rejected by';
+                              $action_date = $var->action_date;
                             }
                           }
                         }
@@ -219,7 +225,7 @@
                 <span class="badge badge-danger badge-counter">
                   <?php 
 
-                      $num = count($order_num);
+                      
                       echo $num;
                 ?></span>
                 </a>
@@ -230,9 +236,12 @@
                 </h6>
                        <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
                         <div class="font-weight-bold">
-                          <div class="text-truncate"> Order <b><?php echo $order->order_id; ?></b> <?php echo $message; ?>
+                        <?php 
+                        $officer  = $this->ion_auth->user($order->supplier)->row()
+                        ?>
+                          <div class="text-truncate"> Order <b><?php echo $order->order_id; ?></b> <?php echo $message .': '. $officer->username; ?>
                           </div>
-                          <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
+                          <div class="small text-gray-500"><?php echo $order->order_status .' '. $action_date; ?></div>
 
                         </div>
                       </a>
