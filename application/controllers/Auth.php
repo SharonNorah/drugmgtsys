@@ -27,6 +27,8 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = "Dashboard";
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 		if (!$this->ion_auth->logged_in())
@@ -59,6 +61,8 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = $this->lang->line('login_heading');
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 
 		// validate form input
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
@@ -114,6 +118,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = "Logout";
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 
 		// log the user out
 		$logout = $this->ion_auth->logout();
@@ -130,6 +135,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = "Change Password";
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header');
 		$this->load->view('layouts/admin-left-menu');
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
@@ -209,6 +215,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = "Change Password";
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header');
 		$this->load->view('layouts/admin-left-menu');
 		// setting validation rules by checking whether identity is username or email
@@ -419,6 +426,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = "Dashboard";
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -472,6 +480,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
@@ -620,6 +629,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = $this->lang->line('edit_user_heading');
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
@@ -769,6 +779,7 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = $this->lang->line('create_group_title');
 		$this->data["date"] = $this->Admin_model->get_date();
+		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->load->view('layouts/admin-header', $this->data);
 		$this->load->view('layouts/admin-left-menu', $this->data);
 
