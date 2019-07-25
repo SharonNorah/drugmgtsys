@@ -33,7 +33,9 @@ class Inventory extends CI_Controller {
 	}
 	public function index($page = 'admin-template') {
 
-		$data = array();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
 
 		
 			$data["inventories"] = $this->Admin_model->list_inventories();
@@ -50,19 +52,20 @@ class Inventory extends CI_Controller {
 	public function create_inventories() 
 	{
 		$page = 'admin-template';
-		
-		$data = array();
+		$data["inventories"] = $this->Admin_model->list_inventories();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
+
 		$this->form_validation->set_rules('inventory_id', 'inventory_id', 'required');
 		$this->form_validation->set_rules('transaction_date', 'transaction_date', 'required');
-		$this->form_validation->set_rules('quantity', 'quantity', 'required');
-		$this->form_validation->set_rules('expiry_date', 'expiry_date', 'required');
 		$this->form_validation->set_rules('source', 'source', 'required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		
         if ($this->form_validation->run() === FALSE)
         {
 		
-			$data["data"] = array();
+			$data["orders"] = $this->Admin_model->list_orders();
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
 			$this->load->view('layouts/' . $page, $data);
@@ -85,17 +88,21 @@ class Inventory extends CI_Controller {
 	public function create_inventory() 
 	{
 		$page = 'admin-template';
+		$data["inventories"] = $this->Admin_model->list_inventories();
 		$data['inventory_id'] = $this->uri->segment(3);
 		$data['drugs'] = $this->Admin_model->list_drugs();
-
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
 		$this->form_validation->set_rules('quantity', 'quantity', 'required');
-		$this->form_validation->set_rules('drug_code', 'drug code', 'required');
+		$this->form_validation->set_rules('drug_code', 'drug code', 'required');	
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
         if ($this->form_validation->run() === FALSE)
         {
 		
 			$data["data"] = array();
+			
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
 			$this->load->view('layouts/' . $page, $data);
@@ -105,20 +112,28 @@ class Inventory extends CI_Controller {
         }
         else
         {
-            $this->Admin_model->create_inventory($data['inventory_id']);
-            redirect("?/admin/inventories");
+			$this->Admin_model->create_inventories( $data['inventory_id'] );
+			redirect("?/admin/inventories");
+   
         }
 		
 	}
 
-	public function edit_inventories($id)
+	public function edit_inventory($id)
 	{
 		$page = 'admin-template';
-		$data = array();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["inventories"] = $this->Admin_model->list_inventories();
+		$data["date"] = $this->Admin_model->get_date();
+
 		$this->load->helper('form');
         $this->load->library('form_validation');
-		$this->form_validation->set_rules('employee_name', 'Name', 'required');
-        $this->form_validation->set_rules('employee_age', 'Age', 'required');
+		$this->form_validation->set_rules('inventory_id', 'inventory_id', 'required');
+		$this->form_validation->set_rules('transaction_date', 'transaction_date', 'required');
+		$this->form_validation->set_rules('quantity', 'quantity', 'required');
+		$this->form_validation->set_rules('expiry_date', 'expiry_date', 'required');
+		$this->form_validation->set_rules('source', 'source', 'required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		
         if ($this->form_validation->run() === FALSE)
@@ -142,6 +157,12 @@ class Inventory extends CI_Controller {
 	public function list_inventory(){
 			$page = 'admin-template';
 			$data["inventory"] = $this->Admin_model->list_inventory($this->uri->segment(3));
+			$data['inventory_id'] = $this->uri->segment(3);
+			$data["orders"] = $this->Admin_model->list_orders();
+			$data["number"] = $this->Admin_model->get_number();
+			$data["inventories"] = $this->Admin_model->list_inventories();
+			$data["date"] = $this->Admin_model->get_date();
+
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
 			$this->load->view('layouts/' . $page, $data);
@@ -151,7 +172,11 @@ class Inventory extends CI_Controller {
 	public function delete_inventory($id)
     {
         $id = $this->uri->segment(3);
-        
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["inventories"] = $this->Admin_model->list_inventories();
+		$data["date"] = $this->Admin_model->get_date();
+
         if (empty($id))
         {
             show_404();

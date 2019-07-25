@@ -24,6 +24,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper(array('form', 'url', 'html', 'text', 'security'));
 		$this->load->database();
 		$this->load->library(array('ion_auth'));
+		$this->load->model('Admin_model');
 		if (!$this->ion_auth->logged_in())
 		{
 		  redirect('?/auth/login');
@@ -34,7 +35,10 @@ class Dashboard extends CI_Controller {
 
 	public function index($page = 'admin-template') {
 
-
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["inventories"] = $this->Admin_model->list_inventories();
+		$data["date"] = $this->Admin_model->get_date();
 		if (!file_exists(APPPATH . 'views/layouts/' . $page . '.php')) {
 			show_404();
 		}

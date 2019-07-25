@@ -32,22 +32,29 @@
                   </tfoot>
                   <tbody>
                   <?php 
-                    if(isset($inventories)){
-                        foreach ($inventories as $inventory):?>
-						<tr>
-							<td><?php echo htmlspecialchars($inventory->inventory_id,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($inventory->transaction_date,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($inventory->quantity,ENT_QUOTES,'UTF-8');?></td>
-                            <td><?php echo htmlspecialchars($inventory->expiry_date,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($inventory->source,ENT_QUOTES,'UTF-8');?></td>
+                    if($inventories){
+                        foreach ($inventories as $inventory){?>
+                        <?php $creater =$this->ion_auth->user($inventory->created_by)->row();
+                        $user = $this->ion_auth->user()->row();?>
+                        <?php if( $creater->company == $user->company){?>
+                          <tr>
+                            <td><?php echo htmlspecialchars($inventory->inventory_id,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($inventory->transaction_date,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($inventory->quantity,ENT_QUOTES,'UTF-8');?></td>
+                                          <td><?php echo htmlspecialchars($inventory->expiry_date,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($inventory->source,ENT_QUOTES,'UTF-8');?></td>
                             <td>
-                            <?php echo anchor("?/admin/list_inventory/".$inventory->inventory_id, 'View') ;?> |
-                            <?php echo anchor("?/admin/edit_drug/".$inventory->inventory_id, 'Edit') ;?> | 
-                            <?php echo anchor("?/admin/delete_drug/".$inventory->inventory_id, 'Delete');?></td>
+                                <?php echo anchor("?/admin/list_inventory/".$inventory->inventory_id, 'View') ;?> |
+                                <?php echo anchor("?/admin/edit_drug/".$inventory->inventory_id, 'Edit') ;?> | 
+                                <?php echo anchor("?/admin/delete_drug/".$inventory->inventory_id, 'Delete');?>
+                            </td>
 
 
-						</tr>
-                    <?php endforeach;
+                          </tr>
+
+                        <?php }
+						
+                        }
                     }?>
                   </tbody>
                 </table>
@@ -55,7 +62,7 @@
 			</div>
 			<div class="card-footer py-3">
 			  <p class="m-0 font-weight-bold text-primary">
-				  <?php echo anchor('?/admin/create_inventories', 'Add Inventory')?>
+				  <?php echo anchor('?/admin/create_inventories/', 'Add Inventory')?>
 			  </p>
 
             </div>

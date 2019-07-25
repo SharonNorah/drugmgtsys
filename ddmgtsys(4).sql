@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 08, 2019 at 02:28 PM
+-- Generation Time: Jul 25, 2019 at 11:31 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.0.32
 
@@ -60,7 +60,7 @@ CREATE TABLE `drug` (
 --
 
 INSERT INTO `drug` (`id`, `drug_code`, `drug_name`, `strength`, `category`, `unit_pack`) VALUES
-(2, 'yes', 'i ', 'picked', 'this', 'drug');
+(3, 'mam', 'mam', 'mam', 'mam', 'unit');
 
 -- --------------------------------------------------------
 
@@ -95,19 +95,22 @@ CREATE TABLE `inventories` (
   `transaction_date` datetime NOT NULL,
   `quantity` int(10) NOT NULL,
   `expiry_date` datetime NOT NULL,
-  `source` varchar(25) NOT NULL
+  `source` varchar(25) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `current_quantity` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `inventories`
 --
 
-INSERT INTO `inventories` (`inventory_id`, `transaction_date`, `quantity`, `expiry_date`, `source`) VALUES
-('1', '2019-06-02 00:00:00', 1000, '2020-06-02 00:00:00', 'mukono'),
-('hit', '2019-06-01 00:00:00', 100, '2021-06-01 00:00:00', 'mukono'),
-('hjk', '2001-03-02 00:00:00', 300, '2020-02-03 00:00:00', 'kampala'),
-('this', '2019-05-29 00:00:00', 125, '2021-05-29 00:00:00', 'mukono'),
-('we', '2019-06-02 00:00:00', 100, '2019-06-02 00:00:00', 'mukono');
+INSERT INTO `inventories` (`inventory_id`, `transaction_date`, `quantity`, `expiry_date`, `source`, `created_by`, `current_quantity`) VALUES
+('bnm', '2019-06-07 00:00:00', 500, '2020-06-07 00:00:00', 'kampala', 4, NULL),
+('bnm,,', '2019-06-07 00:00:00', 500, '2020-06-07 00:00:00', 'kampala', 4, NULL),
+('mo', '2019-07-24 00:00:00', 0, '0000-00-00 00:00:00', 'today', 1, NULL),
+('test', '2018-07-02 00:00:00', 2000, '2019-07-02 00:00:00', 'mukono', 1, NULL),
+('thi', '2019-06-20 00:00:00', 1000, '2020-06-20 00:00:00', 'kampala', 1, NULL),
+('this invetory', '2019-07-20 00:00:00', 1000, '2019-08-20 00:00:00', 'kampala', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,11 +119,13 @@ INSERT INTO `inventories` (`inventory_id`, `transaction_date`, `quantity`, `expi
 --
 
 CREATE TABLE `inventory` (
-  `inventory_id` varchar(25) NOT NULL,
-  `drug_code` varchar(15) NOT NULL,
-  `drug_name` varchar(25) NOT NULL,
+  `inventory_id` varchar(20) NOT NULL,
+  `drug_code` varchar(20) NOT NULL,
+  `drug_name` varchar(30) NOT NULL,
   `quantity` int(10) NOT NULL,
-  `created_by` int(11) NOT NULL
+  `current_quantity` int(10) NOT NULL,
+  `previous_quantity` int(10) NOT NULL,
+  `expiry_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -151,7 +156,7 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`version`) VALUES
-(20190608091725);
+(20190608195739);
 
 -- --------------------------------------------------------
 
@@ -160,19 +165,13 @@ INSERT INTO `migrations` (`version`) VALUES
 --
 
 CREATE TABLE `order` (
-  `order_id` int(11) NOT NULL,
-  `drug_code` varchar(15) NOT NULL,
-  `drug_name` varchar(25) NOT NULL,
-  `quantity` int(10) NOT NULL
+  `id` int(11) NOT NULL,
+  `order_id` varchar(20) NOT NULL,
+  `drug_code` varchar(25) NOT NULL,
+  `drug_name` varchar(30) NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `expiry_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`order_id`, `drug_code`, `drug_name`, `quantity`) VALUES
-(0, 'yes', 'i', 240),
-(0, 'yes', 'i', 345);
 
 -- --------------------------------------------------------
 
@@ -196,8 +195,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `quantity`, `order_date`, `sender`, `supplier`, `delivery_date`, `order_status`) VALUES
-(2, 'Administrat', 0, '2019-05-30 00:00:00', 'Administrator', '3', '0000-00-00 00:00:00', 'Pending Approval'),
-(3, 'Administrat', 0, '2019-05-30 00:00:00', 'Administrator', '3', '0000-00-00 00:00:00', 'Pending Approval');
+(2, 'Administrat', 0, '2019-05-30 00:00:00', '1', '3', '0000-00-00 00:00:00', 'Pending Approval'),
+(3, 'Administrat', 0, '2019-05-30 00:00:00', '1', '3', '0000-00-00 00:00:00', 'Pending Approval'),
+(4, 'Administrat', 0, '2019-06-10 00:00:00', '1', '4', '0000-00-00 00:00:00', 'Pending Approval'),
+(5, 'Administrat', 0, '2019-06-13 00:00:00', '1', '1', '0000-00-00 00:00:00', 'Pending Approval'),
+(6, 'Administrat', 0, '2019-06-11 00:00:00', '1', '1', '0000-00-00 00:00:00', 'Pending Approval'),
+(7, 'Administrat', 0, '2019-07-24 00:00:00', '1', '4', '0000-00-00 00:00:00', 'Pending Approval');
 
 -- --------------------------------------------------------
 
@@ -231,9 +234,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `center_code`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'hBgVd3MVU4NVC/hazGIuo.', 1268889823, 1559982547, 1, 'Admin', 'istrator', 'ADMIN', '0', NULL),
-(3, '::1', 'imokol@kanzucode.com', 'cfead4322cae6cd5ca98b137a85e51a0', NULL, 'imokol@kanzucode.com', NULL, NULL, NULL, NULL, 1558950257, NULL, 1, 'faith', 'imokol', 'kanzucode', '0781411614', NULL),
-(4, '::1', 'peace@gmail.com', '$2y$08$8NA4860RLhuiLrhhVPlC9.fPF6qurv41/7bGxE8CCluRr64Zm9DFK', NULL, 'peace@gmail.com', NULL, NULL, NULL, NULL, 1559992443, NULL, 1, 'peace', 'apolot', 'mukono', '0770000000', 'mkn');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'hBgVd3MVU4NVC/hazGIuo.', 1268889823, 1563949924, 1, 'Admin', 'istrator', 'ADMIN', '0', NULL),
+(3, '::1', 'imokol@kanzucode.com', '96e66d3e36c37a3b700dbfee0e3c4240', NULL, 'imokol@kanzucode.com', NULL, NULL, NULL, NULL, 1558950257, NULL, 1, 'faith', 'imokol', 'kanzucode', '0781411614', NULL),
+(4, '::1', 'peace@gmail.com', '$2y$08$8NA4860RLhuiLrhhVPlC9.fPF6qurv41/7bGxE8CCluRr64Zm9DFK', NULL, 'peace@gmail.com', NULL, NULL, NULL, NULL, 1559992443, 1560175468, 1, 'peace', 'apolot', 'mukono', '0770000000', 'mkn');
 
 -- --------------------------------------------------------
 
@@ -292,6 +295,12 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -320,7 +329,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `drug`
 --
 ALTER TABLE `drug`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -335,10 +344,16 @@ ALTER TABLE `login_attempts`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

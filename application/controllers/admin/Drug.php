@@ -37,9 +37,10 @@ class Drug extends CI_Controller {
 			show_404();
 		}
 		
-		$data = array();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
 
-		
 			$data["drugs"] = $this->Admin_model->list_drugs();
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
@@ -54,7 +55,10 @@ class Drug extends CI_Controller {
 	{
 		$page = 'admin-template';
 		
-		$data = array();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
+
 		$this->form_validation->set_rules('drug_code', 'drug_code', 'required');
 		$this->form_validation->set_rules('drug_name', 'drug_name', 'required');
         $this->form_validation->set_rules('unit_pack', 'unit_pack', 'required');
@@ -82,7 +86,10 @@ class Drug extends CI_Controller {
 	public function edit_drug($id)
 	{
 		$page = 'admin-template';
-		$data = array();
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
+
 		$this->load->helper('form');
         $this->load->library('form_validation');
 		$this->form_validation->set_rules('employee_name', 'Name', 'required');
@@ -110,7 +117,10 @@ class Drug extends CI_Controller {
 	public function delete_drug($id)
     {
         $id = $this->uri->segment(3);
-        
+		$data["orders"] = $this->Admin_model->list_orders();
+		$data["number"] = $this->Admin_model->get_number();
+		$data["date"] = $this->Admin_model->get_date();
+
         if (empty($id))
         {
             show_404();

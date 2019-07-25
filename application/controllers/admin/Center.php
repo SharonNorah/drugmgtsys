@@ -16,8 +16,11 @@ class Center extends CI_Controller {
     public function index($page = 'admin-template') 
     {
 
-		
-			$data["centers"] = $this->Admin_model->list_centers();
+            $data["orders"] = $this->Admin_model->list_orders();
+            $data["centers"] = $this->Admin_model->list_centers();
+            $data["number"] = $this->Admin_model->get_number();
+            $data["date"] = $this->Admin_model->get_date();
+
 			$this->load->view('layouts/admin-header', $data);
 			$this->load->view('layouts/admin-left-menu', $data);
 			$this->load->view('layouts/' . $page, $data);
@@ -31,6 +34,9 @@ class Center extends CI_Controller {
 	{
 		$page = 'admin-template';
 		$data['center_id'] = $this->uri->segment(3);
+        $data["orders"] = $this->Admin_model->list_orders();
+        $data["number"] = $this->Admin_model->get_number();
+        $data["date"] = $this->Admin_model->get_date();
 
 		$this->form_validation->set_rules('center_code', 'center_code', 'required');
         $this->form_validation->set_rules('center_name', 'center_name', 'required');
@@ -59,6 +65,10 @@ class Center extends CI_Controller {
 
 	public function edit_center($center_code)
 	{
+        $data["orders"] = $this->Admin_model->list_orders();
+        $data["number"] = $this->Admin_model->get_number();
+        $data["date"] = $this->Admin_model->get_date();
+
 		$page = 'admin-template';
 		$data = array();
 		$this->load->helper('form');
@@ -90,6 +100,10 @@ class Center extends CI_Controller {
 	}
 
 	public function list_order(){
+            $data["orders"] = $this->Admin_model->list_orders();
+            $data["number"] = $this->Admin_model->get_number();
+            $data["date"] = $this->Admin_model->get_date();
+
 			$page = 'admin-template';
 			$data["inventory"] = $this->Admin_model->list_order($this->uri->segment(3));
 			$this->load->view('layouts/admin-header', $data);

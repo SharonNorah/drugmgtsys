@@ -1,0 +1,52 @@
+
+
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                            <th>Drug Code</th>
+                            <th>Drug name</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                                      <th>Drug Code</th>
+                                      <th>Drug name</th>
+                                      <th>Quantity</th>
+                                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody class="before-add-more">
+                  <tr class="input-group control-group">
+                  <input type="hidden" id="form-field-1" placeholder="Inventory Id" name="inventory_id" class="col-xs-10 col-sm-12" value="<?php echo $inventory_id; ?>">
+                    <td>
+                                    <select id="form-field-2" class="col-xs-10 col-sm-12" name="drug_code">
+                                        <option value=''>Select Drug Code</option>
+                                        <?php foreach($drugs as $drug):?>
+                                            <option value=<?php echo $drug->drug_code; ?>><?php echo $drug->drug_code; ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                    </td>
+                    <td>
+                                    <select id="form-field-3" class="col-xs-10 col-sm-12" name="drug_name">">
+                                        <option value=''>Select Drug Name</option>
+                                        <?php foreach($drugs as $drug):?>
+                                            <option value=<?php echo $drug->drug_name; ?>><?php echo $drug->drug_name; ?></option>
+                                        <?php endforeach ?>
+                                    </select>  
+                    </td>
+                                  <td>
+                                <input type="number" id="form-field-4" placeholder="Quantity" class="col-xs-10 col-sm-12" name="quantity" value="<?php echo set_value('quantity'); ?>">                                  <td>
+                     <td></td>
+
+
+                  </tr>
+                  </tbody>
+                </table>
+      <!-- End of Main Content -->
+
+                             <a href="javascript:void(0);" class="btn btn-danger remove_button form-group"><i class="glyphicon glyphicon-remove"></i> Remove</a>
+
+

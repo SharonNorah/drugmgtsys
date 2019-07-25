@@ -12,32 +12,25 @@
  
             <?php echo form_open('home/edit/'.$data['id'], "class='form-horizontal'"); ?>
                   <div class="form-group">
-                        <label class="col-sm-12 control-label no-padding-right" for="form-field-1"> Drug Code </label>
+                        <label class="col-sm-12 control-label no-padding-right" for="form-field-1"> Inventory ID </label>
             
                         <div class="col-sm-12">
-                        <input type="text" id="form-field-1" placeholder="Drug Code" name="drug_code" class="col-xs-12 col-sm-12" value="<?php echo $data['drug_code']; ?>">
+                        <input type="text" id="form-field-1" placeholder="Inventory ID" name="inventory_id" class="col-xs-12 col-sm-12" value="<?php echo $data['inventory_id']; ?>">
                         </div>
                   </div>
             
                   <div class="form-group">
-                        <label class="col-sm-12 control-label no-padding-right" for="form-field-2"> Drug Name </label>
+                        <label class="col-sm-12 control-label no-padding-right" for="form-field-2"> Transaction Date </label>
             
                         <div class="col-sm-12">
-                        <input type="text" id="form-field-2" placeholder="Drug Name" class="col-xs-12 col-sm-12" name="drug_name" value="<?php echo $data['drug_name']; ?>">
+                        <input type="date" id="form-field-2" placeholder="Transaction Date" class="col-xs-12 col-sm-12" name="transaction_date" value="<?php echo $data['transaction_date']; ?>">
                         </div>
                   </div>
                   <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-3"> Drug Strength </label>
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-3"> Quantity  </label>
             
                         <div class="col-sm-12">
-                        <input type="text" id="form-field-3" placeholder="Drug Strenght" class="col-xs-12 col-sm-12" name="strength" value="<?php echo $data['strength']; ?>">
-                        </div>
-                  </div>
-                  <div class="form-group">
-                        <label class="col-sm-12 control-label no-padding-right" for="form-field-4"> Drug Category </label>
-            
-                        <div class="col-sm-12">
-                        <input type="text" id="form-field-4" placeholder="Drug Category" name="category" class="col-xs-12 col-sm-12" value="<?php echo $data['category']; ?>">
+                        <input type="text" id="form-field-3" placeholder="Quantity " class="col-xs-12 col-sm-12" name="quantity" value="<?php echo $data['quantity']; ?>">
                         </div>
                   </div>
                   <div class="form-group">
@@ -66,7 +59,7 @@
         </div>
         <div class="card-footer py-3">
 		<p class="m-0 font-weight-bold text-primary">
-		      <?php echo anchor('?/admin/drug', 'View Drug List')?> 
+		      <?php echo anchor('?/admin/drug/', 'View Drug List')?> 
 		</p>
 
         </div>

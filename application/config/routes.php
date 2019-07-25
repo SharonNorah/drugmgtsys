@@ -65,13 +65,18 @@ $route['admin/create_inventories']      = 'admin/inventory/create_inventories/';
 $route['admin/create_inventory/(:any)'] = 'admin/inventory/create_inventory/$1';
 $route['admin/inventories']             = 'admin/inventory';
 $route['admin/list_inventory/(:any)']   = 'admin/inventory/list_inventory/$1';
+$route['admin/edit_inventory/(:any)']   = 'admin/inventory/edit_inventory/$1';
+$route['admin/delete_inventory/(:any)']      = 'admin/inventory/delete_inventory/$1';
 
 $route['admin/order']                   = 'admin/order';
 $route['admin/create_orders']           = 'admin/order/create_orders/';
 $route['admin/create_order/(:any)']     = 'admin/order/create_order/$1';
 $route['admin/edit_order/(:any)']       = 'admin/order/edit_order/$1';
-$route['admin/list_order/']             = 'admin/order/list_order';
-$route['admin/list_order/(:any)']       = 'admin/order/list_order/$1';
+$route['admin/list_order/(:any)/(:any)']       = 'admin/order/list_order/$1';
+$route['admin/approve_order/(:any)']       = 'admin/order/approve_order/$1';
+$route['admin/rejected_order/(:any)']       = 'admin/order/rejected_order/$1';
+$route['admin/delete_order/(:any)/(:any)']      = 'admin/order/delete_order/$1';
+
 
 $route['admin/center']                   = 'admin/center';
 $route['admin/create_center']            = 'admin/center/create_center/';
@@ -79,3 +84,4 @@ $route['admin/create_center/(:any)']     = 'admin/center/create_center/$1';
 $route['admin/edit_center/(:any)']       = 'admin/center/edit_center/$1';
 $route['admin/list_center/']             = 'admin/center/list_center';
 $route['admin/list_center/(:any)']       = 'admin/center/list_center/$1';
+$route['admin/delete_center/(:any)']      = 'admin/center/delete_center/$1';

@@ -59,7 +59,7 @@
         </div>
         <div class="card-footer py-3">
 		<p class="m-0 font-weight-bold text-primary">
-		      <?php echo anchor('?/admin/center', 'View Centers')?> 
+		      <?php echo anchor('?/admin/center/', 'View Centers')?> 
 		</p>
 
         </div>

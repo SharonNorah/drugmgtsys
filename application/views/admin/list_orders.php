@@ -29,19 +29,25 @@
                   <tbody>
                   <?php 
                     if($orders){
-                        foreach ($orders as $order):?>
-						<tr>
-							<td><?php echo htmlspecialchars($order->order_date,ENT_QUOTES,'UTF-8');?></td>
-							<td><?php echo htmlspecialchars($order->sender,ENT_QUOTES,'UTF-8');?></td>
-                            <td><?php echo htmlspecialchars($order->supplier,ENT_QUOTES,'UTF-8');?></td>
-                            <td><?php echo htmlspecialchars($order->order_status,ENT_QUOTES,'UTF-8');?></td>
+                        foreach ($orders as $order){?>
+                        <?php 
+                        $sender  =$this->ion_auth->user($order->sender)->row();
+                        $supplier  =$this->ion_auth->user($order->supplier)->row();
+                        $user = $this->ion_auth->user()->row();?>
+                        <?php if (($supplier->id == $user->id) || ($sender->id == $user->id)) {?>
+                          <tr>
+                            <td><?php echo htmlspecialchars($order->order_date, ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($order->sender, ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($order->supplier, ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($order->order_status, ENT_QUOTES, 'UTF-8');?></td>
                             <td>
-                            <?php echo anchor("?/admin/list_order/".$order->order_id, 'View') ;?> |
-                            <?php echo anchor("?/admin/edit_order/".$order->order_id, 'Edit') ;?> | 
-                            <?php echo anchor("?/admin/delete_order/".$order->order_id, 'Delete');?></td>
+                            <?php echo anchor("?/admin/list_order/".$order->id."/".$order->order_id, 'View') ;?> |
+                            <?php echo anchor("?/admin/edit_order/".$order->id."/".$order->order_id, 'Edit') ;?> | 
+                            <?php echo anchor("?/admin/delete_order/".$order->id."/".$order->order_id, 'Delete');?></td>
 
 						</tr>
-                    <?php endforeach;
+                        <?php }
+                    }
                     }?>
                   </tbody>
                 </table>

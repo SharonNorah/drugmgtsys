@@ -141,49 +141,47 @@
 
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
+            <?php 
+            $user = $this->ion_auth->user()->row();?>
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter">
+                <?php 
+                echo $date->num_rows();
+                ?>
+                </span>
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Alerts Center
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <?php 
+                $expires = $date->result();
+                if($expires){
+                foreach($expires as $expire) {
+                  
+                  $created_by = $this->ion_auth->user($expire->created_by)->row();
+                  if($created_by->company == $user->company){
+                  ?>
+
+                  <a class="dropdown-item d-flex align-items-center" href='?/admin/list_inventory/<?php echo $expire->inventory_id; ?>/'>
                     <div class="mr-3">
                     <div class="icon-circle bg-primary">
                         <i class="fas fa-file-alt text-white"></i>
                     </div>
                     </div>
                     <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    <div class="small text-gray-500">Due date <?php echo $expire->expiry_date; ?></div>
+                    <span class="font-weight-bold">Inventory ID: <?php echo $expire->inventory_id; ?> Created by: <?php echo $created_by->last_name .' '. $created_by->first_name; ?></span>
                     </div>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                        <i class="fas fa-donate text-white"></i>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                    </div>
-                </a>
+                <?php 
+                }
+              }
+                }?>
+                
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                 </div>
             </li>
@@ -193,24 +191,68 @@
                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
+                <span class="badge badge-danger badge-counter">
+                <?php 
+
+                  if($orders){
+                  foreach($orders as $order){ 
+                    $this->db->where('order_status', 'Pending Approval');
+                    $this->db->where('supplier', $order->supplier)->or_where('sender', $order->supplier);
+                        $query = $this->db->get('orders');
+                        $result = $query->result();
+                  var_dump($query->num_rows());
+                       if($result){
+                         // echo $query->num_rows();
+                        }
+                      }
+                    }
+                ?></span>
                 </a>
                 <!-- Dropdown - Messages -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                     Order Notifications
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
-                    </div>
+                <?php 
+                if($orders){
+                       foreach($orders as $order){ 
+                    
+                         if($order->supplier == $user->id && $order->order_status == 'Pending Approval'){?>
+                    <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
                     <div class="font-weight-bold">
-                    <div class="text-truncate"></div>
-                    <div class="small text-gray-500"></div>
+                          <div class="text-truncate"> Order <b><?php echo $order->order_id; ?></b> is pending approval
+                          </div>
+                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
+
                     </div>
                 </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        <?php  }
+                         if($order->sender == $user->id && $order->order_status == 'Pending Approval'){?>
+                                         <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
+                    <div class="font-weight-bold">
+                          <div class="text-truncate">Order <b><?php echo $order->order_id; ?></b> is pending approval
+                          </div>
+                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
+
+                    </div>
+                </a>
+                        <?php }
+                        if($order->sender == $user->id && $order->order_status == 'Order Approved'){?>
+                                        <a class="dropdown-item d-flex align-items-center" href="?/admin/list_order/<?php echo $order->order_id; ?>">
+                    <div class="font-weight-bold">
+                          <div class="text-truncate">Order <b><?php echo $order->order_id; ?></b> has been approved
+                          </div>
+                    <div class="small text-gray-500"><?php echo $order->order_status; ?></div>
+
+                    </div>
+                </a>
+                        <?php 
+                        }
+                    ?>
+                <?php 
+                       }
+                     }?>
+                <a class="dropdown-item text-center small text-gray-500" href="?/admin/orders">Read More Messages</a>
                 </div>
             </li>
 

@@ -66,7 +66,7 @@
         </div>
         <div class="card-footer py-3">
 		<p class="m-0 font-weight-bold text-primary">
-		      <?php echo anchor('?/admin/drug', 'View Drug List')?> 
+		      <?php echo anchor('?/admin/drug/', 'View Drug List')?> 
 		</p>
 
         </div>

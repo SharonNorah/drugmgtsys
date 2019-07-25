@@ -27,26 +27,14 @@
                               </div>
                         </div>
                         <div class="form-group">
-                              <label class="col-sm-12 control-label no-padding-right" for="form-field-3"> Quantity </label>
-                        
-                              <div class="col-sm-12">
-                              <input type="number" id="form-field-3" placeholder="Quantity" class="col-xs-10 col-sm-12" name="quantity" value="<?php echo set_value('quantity'); ?>">
-                              </div>
-                        </div>
-                        <div class="form-group">
-                              <label class="col-sm-12 control-label no-padding-right" for="form-field-4"> Expiry Date </label>
-                        
-                              <div class="col-sm-12">
-                              <input type="date" id="form-field-4" placeholder="Expiry Date" class="col-xs-10 col-sm-12" name="expiry_date" value="<?php echo set_value('expiry_date'); ?>">
-                              </div>
-                        </div>
-                        <div class="form-group">
                               <label class="col-sm-12 control-label no-padding-right" for="form-field-5"> Source </label>
                         
                               <div class="col-sm-12">
                               <input type="text" id="form-field-5" placeholder="Source" class="col-xs-10 col-sm-12" name="source" value="<?php echo set_value('source'); ?>">
                               </div>
                         </div>
+                        <?php $user=$this->ion_auth->user()->row() ?>
+                        <input type="hidden" id="form-field-5" name="created_by" value="<?php echo $user->id; ?>">
                         <div class="space-4"></div>
                         <div class="clearfix form-actions">
                               <div class="col-md-offset-3 col-md-9">
@@ -67,7 +55,7 @@
             </div>
             <div class="card-footer py-3">
                   <p class="m-0 font-weight-bold text-primary">
-                        <?php echo anchor('?/admin/drug', 'View Drug List')?> 
+                        <?php echo anchor('?/admin/drug/', 'View Drug List')?> 
                   </p>
 
             </div>

@@ -50,7 +50,7 @@
 			</div>
 			<div class="card-footer py-3">
 			  <p class="m-0 font-weight-bold text-primary">
-				  <?php echo anchor('?/admin/inventories', 'View Inventory')?> | <?php echo anchor('?/admin/create_drug', 'Add New Drug')?>
+				  <?php echo anchor('?/admin/inventories/', 'View Inventory')?> | <?php echo anchor('?/admin/create_drug', 'Add New Drug')?>
 			  </p>
 
             </div>

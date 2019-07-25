@@ -64,7 +64,7 @@
 
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password"><?php echo lang('login_forgot_password');?></a>
+                    <a class="small" href="?/auth/forgot-password"><?php echo lang('login_forgot_password');?></a>
                   </div>
                 </div>
               </div>

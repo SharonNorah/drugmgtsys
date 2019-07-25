@@ -11,7 +11,7 @@
 
                   <?php echo validation_errors(); ?>
             
-                  <?php echo form_open('?/admin/create_orders', "class='form-horizontal'"); ?>
+                  <?php echo form_open('?/admin/create_orders/', "class='form-horizontal'"); ?>
                         <div class="form-group">
                         
                               <div class="col-sm-12">
@@ -28,8 +28,9 @@
                         
                         <div class="form-group">
                               <div class="col-sm-12">
-                              <?php $user = $this->ion_auth->user()->row();?>
-                              <input type="hidden" id="form-field-2" class="col-xs-10 col-sm-12" name="sender" value="<?php echo $user->first_name. $user->last_name; ?>">
+                              <?php $user = $this->ion_auth->user()->row();
+                              ?>
+                              <input type="hidden" id="form-field-2" class="col-xs-10 col-sm-12" name="sender" value="<?php echo $user->id; ?>">
                               </div>
                         </div>
                         <div class="form-group">
@@ -67,7 +68,7 @@
             </div>
             <div class="card-footer py-3">
                   <p class="m-0 font-weight-bold text-primary">
-                        <?php echo anchor('?/admin/drug', 'View Drug List')?> 
+                        <?php echo anchor('?/admin/drug/', 'View Drug List')?> 
                   </p>
 
             </div>

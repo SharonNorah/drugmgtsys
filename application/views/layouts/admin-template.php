@@ -32,6 +32,14 @@ if ($this->uri->segment(2) == 'dashboard') {
 
 	$this->load->view('admin/list_inventory');
 
+} elseif (($this->uri->segment(2) == 'rejected_order') && ($this->uri->segment(3) != '')) {
+
+	$this->load->view('admin/rejected_order');
+  
+} elseif (($this->uri->segment(2) == 'create_inventory') && ($this->uri->segment(3) != '')) {
+  
+  $this->load->view('admin/create_inventory');
+  
 } elseif ($this->uri->segment(2) == 'create_inventories') {
 
 	$this->load->view('admin/create_inventories');
@@ -60,7 +68,7 @@ if ($this->uri->segment(2) == 'dashboard') {
   
   $this->load->view('admin/create_order');
   
-} elseif ($this->uri->segment(2) == 'list_order') {
+} elseif (($this->uri->segment(2) == 'list_order') && ($this->uri->segment(3) != '') && ($this->uri->segment(4) != '')) {
   
   $this->load->view('admin/list_order');
    
@@ -74,7 +82,12 @@ if ($this->uri->segment(2) == 'dashboard') {
    
 } elseif (($this->uri->segment(2) == 'edit_center') && ($this->uri->segment(3) != '')) {
 
-	$this->load->view('admin/edit_center');
+  $this->load->view('admin/edit_center');
+  
+
+} elseif (($this->uri->segment(2) == 'edit_inventory') && ($this->uri->segment(3) != '')) {
+
+  $this->load->view('admin/edit_inventory');
 
 } else {
 	show_404();

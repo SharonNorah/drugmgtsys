@@ -12,3 +12,9 @@ table {
 .create_invetory{
     display: none;
 }
+.hide{
+    display: none;
+}
+.input-group.control-group .form-field-1{
+    display: none;
+}

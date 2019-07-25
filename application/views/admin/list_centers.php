@@ -52,7 +52,7 @@
 			</div>
 			<div class="card-footer py-3">
 			  <p class="m-0 font-weight-bold text-primary">
-				  <?php echo anchor('?/admin/create_center ', 'Add New Center')?>
+				  <?php echo anchor('?/admin/create_center/', 'Add New Center')?>
 			  </p>
 
             </div>
