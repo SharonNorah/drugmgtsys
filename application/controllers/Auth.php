@@ -64,9 +64,6 @@ class Auth extends CI_Controller
 		$this->data["orders"] = $this->Admin_model->list_orders();
 		$this->data["orders"] = $this->Admin_model->list_orders();
 
-		// validate form input
-		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
-		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -495,10 +492,6 @@ class Auth extends CI_Controller
 		$this->data['listGroups']= $this->ion_auth->groups()->result();
 		$this->data['centers']= $this->Admin_model->list_centers();
 		
-		// validate form input
-		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('center_code', $this->lang->line('create_user_validation_center_code'), 'trim|required');
 
 		if ($identity_column !== 'email')
 		{
@@ -642,11 +635,6 @@ class Auth extends CI_Controller
 		$groups = $this->ion_auth->groups()->result_array();
 		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
 
-		// validate form input
-		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim|required');
 
 		if (isset($_POST) && !empty($_POST))
 		{
@@ -788,9 +776,6 @@ class Auth extends CI_Controller
 			redirect('?/auth', 'refresh');
 		}
 
-		// validate form input
-		$this->form_validation->set_rules('group_name', $this->lang->line('create_group_validation_name_label'), 'trim|required|alpha_dash');
-
 		if ($this->form_validation->run() === TRUE)
 		{
 			$new_group_id = $this->ion_auth->create_group($this->input->post('group_name'), $this->input->post('description'));
@@ -852,8 +837,6 @@ class Auth extends CI_Controller
 
 		$group = $this->ion_auth->group($id)->row();
 
-		// validate form input
-		$this->form_validation->set_rules('group_name', $this->lang->line('edit_group_validation_name_label'), 'required|alpha_dash');
 
 		if (isset($_POST) && !empty($_POST))
 		{
