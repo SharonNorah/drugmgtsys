@@ -192,13 +192,13 @@
                           if(($var->order_status === 'Pending Approval') && ($var->supplier === $user->id)){
                             $order_num = $orders;
                             $order = $var;
-                            $num = count($var->order_status);
+                            $num = count($var->id);
                             $message = 'Is Pending Approval';
                           }
                           if(($var->sender === $user->id)){
                             
                             $order_num = $orders;
-                            $num = count($var->order_status);
+                            $num = count($var->id);
                             if($var->order_status === 'Pending Approval'){
                               $order = $var;
                               $message = 'Is Pending Approval from';
@@ -206,12 +206,10 @@
                             if($var->order_status === 'Approved'){
                               $order = $var;
                               $message = 'Was Approved by';
-                              $action_date = $var->action_date;
                             }
                             if($var->order_status === 'Rejected'){
                               $order = $var;
                               $message = 'Was Rejected by';
-                              $action_date = $var->action_date;
                             }
                           }
                         }
